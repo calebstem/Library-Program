@@ -60,6 +60,20 @@ body{
   border-radius: 8px;
 }
 
+.deleteBookButton{
+  font-size: 10px;
+  background-color: lightcoral;
+  color: black;
+  margin-left: 320px;
+  cursor: pointer;
+  border: none;
+  opacity: .8;
+}
+
+.deleteBookButton:hover {
+  opacity: 1;
+}
+
 .BookList {
   list-style-type: none;
   padding: 0px;

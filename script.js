@@ -21,9 +21,14 @@ function addBookToLibrary(book) {
 const cardContainer = document.getElementById('CardContainer');
 
 function displayLibrary(){
+  while (cardContainer.firstChild){ //removes the display and redraws it
+    cardContainer.removeChild(cardContainer.lastChild)
+  }
+
   for(let i = 0; i < myLibrary.length; i++){
     const newDiv = document.createElement('div');
     const newDivContent = document.createElement('ul');
+    const deleteBook = document.createElement('button');
     const bookTitle = document.createElement('li');
     const bookAuthor = document.createElement('li');
     const bookPages = document.createElement('li');
@@ -34,6 +39,11 @@ function displayLibrary(){
     
     newDivContent.classList.add('BookList');
     newDivContent.setAttribute('id', `list${i}`)
+
+    deleteBook.classList.add('deleteBookButton')
+    deleteBook.setAttribute('id', `${i}`)
+    deleteBook.appendChild(document.createTextNode('Remove Book'))
+    
 
     const bookContent = Object.values(myLibrary[i]);
     
@@ -46,12 +56,12 @@ function displayLibrary(){
     bookRead.appendChild(document.createTextNode(bookContent[3]));
     bookRead.classList.add('read');
 
-
     newDivContent.appendChild(bookTitle);
     newDivContent.appendChild(bookAuthor);
     newDivContent.appendChild(bookPages);
     newDivContent.appendChild(bookRead);
 
+    newDiv.appendChild(deleteBook);
     newDiv.appendChild(newDivContent);
     cardContainer.appendChild(newDiv);
   }
@@ -67,6 +77,7 @@ function closeForm() {
 
 
 function submitBook() {
+  closeForm();
   let submittedTitle = document.getElementById('submittedTitle').value;
   let submittedAuthor = document.getElementById('submittedAuthor').value;
   let submittedPages = document.getElementById('submittedPages').value;
@@ -77,11 +88,17 @@ function submitBook() {
   } else {
     submittedRead = false;
   }
-  
+
   let submittedBook = new Book(`${submittedTitle}`, `${submittedAuthor}`, `${submittedPages}`, submittedRead)
-  console.table(submittedBook);
   addBookToLibrary(submittedBook);
+  displayLibrary();
 }
+
+function removeBook(arrayPos){
+  myLibrary.splice(arrayPos, 1);
+  displayLibrary();
+}
+
 
 
 const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '295', false)
@@ -93,3 +110,17 @@ addBookToLibrary(farenheit451);
 addBookToLibrary(hgttg);
 
 displayLibrary();
+
+function test(input){
+  console.log(input);
+  //console.log(`${input}`);
+}
+
+const deleteBookButton = document.getElementsByClassName('deleteBookButton')
+
+for (let i = 0; i < deleteBookButton.length; i++) {
+  deleteBookButton[i].addEventListener('click', function() {
+    console.log(i);
+    //removeBook(i);
+  }, false);
+}
