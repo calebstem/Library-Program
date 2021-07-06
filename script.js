@@ -65,23 +65,24 @@ function closeForm() {
   document.getElementById('bookForm').style.display = 'none';
 }
 
+
 function submitBook() {
+  let submittedTitle = document.getElementById('submittedTitle').value;
+  let submittedAuthor = document.getElementById('submittedAuthor').value;
+  let submittedPages = document.getElementById('submittedPages').value;
+  let submittedRead = document.getElementById('submittedRead').value;
+  
   if (submittedRead == 'Yes'){
     submittedRead = true;
-  } else if (submittedRead == 'No'){
+  } else {
     submittedRead = false;
   }
-  let submittedBook = new Book(submittedTitle, submittedAuthor, submittedPages, submittedRead)
+  
+  let submittedBook = new Book(`${submittedTitle}`, `${submittedAuthor}`, `${submittedPages}`, submittedRead)
+  console.table(submittedBook);
   addBookToLibrary(submittedBook);
 }
 
-let submittedTitle = document.getElementById('submittedTitle').value;
-let submittedAuthor = document.getElementById('submittedAuthor').value;
-let submittedPages = document.getElementById('submittedPages').value;
-let submittedRead = document.getElementById('submittedRead').value;
-
-
-document.getElementById('submittedTitle').value;
 
 const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '295', false)
 const farenheit451 = new Book('Fahrenheit 451', 'Ray Bradbury', '158', false)
