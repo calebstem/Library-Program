@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel='stylesheet' href='style.css'></link>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class='form-popup' id='bookForm'>
+    <form class='form-container'>
+
+      <label for='title'>Book Title</label>
+      <input type='text' placeholder="Enter Book Title" name='title' id='submittedTitle'  required>
+
+      <label for ='author'>Author</label>
+      <input type="text" placeholder="Author of Book" name='author' id='submittedAuthor'  required>
+
+      <label for="pages">Pages</label>
+      <input type="text" placeholder="Number of pages" name="pages" id='submittedPages'  required>
+
+      <label for="read">Have You Read This Book?</label>
+      <input type="text" name="read" list='trueorfalse' id='submittedRead' required>
+      <datalist id='trueorfalse'>
+        <option value="Yes"></option>
+        <option value="No"></option>
+      </datalist>
+
+      <button type="button" class="btn" onclick="submitBook()">Add Book</button>
+      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    </form>
+  </div>
+  
+  <div class='formbutton'>
+    <button id="open-button" onclick="openForm()">Add Book</button>
+  </div>
+
+  <div id='CardContainer'>
+
+  </div>
+  <script src='script.js'></script>
+</body>
+</html>
