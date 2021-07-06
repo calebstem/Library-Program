@@ -29,6 +29,7 @@ function displayLibrary(){
     const newDiv = document.createElement('div');
     const newDivContent = document.createElement('ul');
     const deleteBook = document.createElement('button');
+    const deleteBookButton = document.getElementsByClassName('deleteBookButton')
     const bookTitle = document.createElement('li');
     const bookAuthor = document.createElement('li');
     const bookPages = document.createElement('li');
@@ -44,7 +45,6 @@ function displayLibrary(){
     deleteBook.setAttribute('id', `${i}`)
     deleteBook.appendChild(document.createTextNode('Remove Book'))
     
-
     const bookContent = Object.values(myLibrary[i]);
     
     bookTitle.appendChild(document.createTextNode(bookContent[0]));
@@ -64,6 +64,10 @@ function displayLibrary(){
     newDiv.appendChild(deleteBook);
     newDiv.appendChild(newDivContent);
     cardContainer.appendChild(newDiv);
+
+    deleteBookButton[i].addEventListener('click', function() {
+      removeBook(i);
+    }, false);
   }
 }
 
@@ -114,13 +118,4 @@ displayLibrary();
 function test(input){
   console.log(input);
   //console.log(`${input}`);
-}
-
-const deleteBookButton = document.getElementsByClassName('deleteBookButton')
-
-for (let i = 0; i < deleteBookButton.length; i++) {
-  deleteBookButton[i].addEventListener('click', function() {
-    console.log(i);
-    //removeBook(i);
-  }, false);
 }
