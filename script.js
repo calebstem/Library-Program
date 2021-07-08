@@ -1,16 +1,18 @@
 let myLibrary = [];
+myLibrary = JSON.parse(localStorage.getItem('myLibrary') || '[]');
 
 function Book(title, author, pages, read) {
   this.title = title
   this.author = author
   this.pages = pages
   this.read = read
-  this.info = function() {
-    if(read){
-      return `${title} by ${author}, ${pages} pages, have read`
-    } else {
-      return `${title} by ${author}, ${pages} pages, not read yet`
-    }
+}
+
+Book.prototype.info = function() {
+  if(this.read){
+    return `${this.title} by ${this.author}, ${this.pages} pages, have read`
+  } else {
+    return `${this.title} by ${this.author}, ${this.pages} pages, not read yet`
   }
 }
 
@@ -53,7 +55,6 @@ function displayLibrary(){
     bookAuthor.classList.add('author');
     bookPages.appendChild(document.createTextNode(`${bookContent[2]} pages`));
     bookPages.classList.add('pages');
-    bookRead.setAttribute('id', `read${i}`)
     if(bookContent[3]){
       bookRead.appendChild(document.createTextNode('Read'));
     } else {
@@ -79,6 +80,7 @@ function displayLibrary(){
       changeReadStatus(i)
     }, false);
   }
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
 }
 
 function openForm() {
@@ -111,6 +113,7 @@ function submitBook() {
 function removeBook(arrayPos){
   myLibrary.splice(arrayPos, 1);
   displayLibrary();
+  //localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
 }
 
 function changeReadStatus(arrayPos){
@@ -119,17 +122,12 @@ function changeReadStatus(arrayPos){
 }
 
 
-const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '295', false)
-const farenheit451 = new Book('Fahrenheit 451', 'Ray Bradbury', '158', false)
-const hgttg = new Book('The Hitchhiker\'s Guide to the Galaxy', 'Douglas Adams', '193', true)
+// const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '295', false)
+// const farenheit451 = new Book('Fahrenheit 451', 'Ray Bradbury', '158', false)
+// const hgttg = new Book('The Hitchhiker\'s Guide to the Galaxy', 'Douglas Adams', '193', true)
 
-addBookToLibrary(theHobbit);
-addBookToLibrary(farenheit451);
-addBookToLibrary(hgttg);
+// addBookToLibrary(theHobbit);
+// addBookToLibrary(farenheit451);
+// addBookToLibrary(hgttg);
 
 displayLibrary();
-
-function test(input){
-  console.log(input);
-  //console.log(`${input}`);
-}
