@@ -53,7 +53,13 @@ function displayLibrary(){
     bookAuthor.classList.add('author');
     bookPages.appendChild(document.createTextNode(`${bookContent[2]} pages`));
     bookPages.classList.add('pages');
-    bookRead.appendChild(document.createTextNode(bookContent[3]));
+    bookRead.setAttribute('id', `read${i}`)
+    if(bookContent[3]){
+      bookRead.appendChild(document.createTextNode('Read'));
+    } else {
+      bookRead.appendChild(document.createTextNode('Unread'));
+    }
+    
     bookRead.classList.add('read');
 
     newDivContent.appendChild(bookTitle);
@@ -67,6 +73,10 @@ function displayLibrary(){
 
     deleteBookButton[i].addEventListener('click', function() {
       removeBook(i);
+    }, false);
+
+    bookRead.addEventListener('click', function() {
+      changeReadStatus(i)
     }, false);
   }
 }
@@ -103,6 +113,10 @@ function removeBook(arrayPos){
   displayLibrary();
 }
 
+function changeReadStatus(arrayPos){
+  myLibrary[arrayPos].read = !myLibrary[arrayPos].read
+  displayLibrary();
+}
 
 
 const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '295', false)
